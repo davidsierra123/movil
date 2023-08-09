@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
-import 'package:carousel_slider/carousel_slider.dart';
+import 'view/menu.dart';
+import 'view/carrusel.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +31,7 @@ class Inicio extends StatelessWidget {
           Opacity(
             opacity: 0.7,
             child: Image.asset(
-              'assets/images/sillas.png.dfhhfihihhfhfhfiuhuh',
+              'assets/images/sillas.png',
               fit: BoxFit.cover,
             ),
           ),
@@ -39,28 +40,37 @@ class Inicio extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Comprar',
-                  style: TextStyle(fontSize: 21.0, fontWeight: FontWeight.bold),
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: 185.0), // Agrega un padding izquierdo
+                  child: Text(
+                    'Comprar',
+                    style:
+                        TextStyle(fontSize: 23.0, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Text(
-                  'Bienvenido, Aqui podrás Tapizar tus Sillas',
+                  'Bienvenido, Aqui podrás Tapizar Sillas',
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 21.0,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      fontSize: 23.0,
                       fontWeight: FontWeight.bold),
                   textAlign: TextAlign.end,
                 ),
-                Text(
-                  'Alquilar',
-                  style: TextStyle(fontSize: 21.0, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.end,
+                Padding(
+                  padding: EdgeInsets.only(left: 185.0),
+                  child: Text(
+                    'Alquilar',
+                    style:
+                        TextStyle(fontSize: 23.0, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.end,
+                  ),
                 ),
               ],
             ),
           ),
           Positioned(
-            bottom: 330, // Ajusta el valor para mover el botón hacia abajo
+            bottom: 190, // Ajusta el valor para mover el botón hacia abajo
             left: 0,
             right: 0,
             child: Center(
@@ -76,7 +86,14 @@ class Inicio extends StatelessWidget {
                   );
                   // Aquí puedes colocar el código que se ejecutará cuando se presione el botón.
                 },
-                child: const Text('Ingresar'),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 25,
+                      vertical: 12), // Ajusta los valores según necesites
+                  textStyle: const TextStyle(
+                      fontSize: 18), // Ajusta el tamaño del texto
+                ),
+                child: const Text('¡Ingresar!'),
               ),
             ),
           ),
@@ -119,17 +136,13 @@ class DemoMWNavigationRailScreen1 extends StatefulWidget {
 class _DemoMWNavigationRailScreen1State
     extends State<DemoMWNavigationRailScreen1> {
   List<Widget> widgets = <Widget>[
-    const Center(
-        child: Text("",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24))),
-    const Center(
-        child: Text("Profile View",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24))),
+    const Center(child: HorizontalCarousel()),
+    const Center(child: Alquiler()),
     const Center(
         child: Text("Notifications View",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24))),
     const Center(
-        child: Text("Stats View",
+        child: Text("Notifications View",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24))),
     const Center(
         child: Text("Schedule View",
@@ -159,36 +172,25 @@ class _DemoMWNavigationRailScreen1State
                   showHorizontalCarousel = index == 0;
                 });
               },
-              trailing: Container(
-                padding: const EdgeInsets.only(top: 64),
-                child: IconButton(
-                  icon: Icon(
-                      isExpanded
-                          ? Icons.arrow_back_ios_rounded
-                          : Icons.arrow_forward_ios,
-                      color: Colors.blue),
-                  onPressed: () {
-                    setState(() {
-                      isExpanded = !isExpanded;
-                    });
-                  },
-                ),
-              ),
               leading: AnimatedContainer(
                 duration: const Duration(milliseconds: 100),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.account_circle,
-                        size: 50,
-                        color: widget
-                            .appStore.iconColor), // Usa widget.appStore aquí
-                    isExpanded
-                        ? const Text('Usuario', style: TextStyle(fontSize: 20))
-                        : Container(),
-                    isExpanded
-                        ? const Text('Admin', style: TextStyle(fontSize: 14))
-                        : Container(),
+                    IconButton(
+                      icon: Icon(
+                        isExpanded
+                            ? Icons.clear
+                            : Icons
+                                .menu, // Cambia los iconos según la expansión
+                        color: Colors.blue,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          isExpanded = !isExpanded;
+                        });
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -234,9 +236,14 @@ class _DemoMWNavigationRailScreen1State
             ),
             const VerticalDivider(width: 0),
             Expanded(
-              child: showHorizontalCarousel
-                  ? HorizontalCarousel() // Muestra HorizontalCarousel si showHorizontalCarousel es true
-                  : widgets[_selectedIndex],
+              child: _selectedIndex == 0
+                  ? const HorizontalCarousel() // Muestra HorizontalCarousel si _selectedIndex es 0
+                  : _selectedIndex == 1
+                      ? const Alquiler()
+                      : widgets[_selectedIndex],
+              // : _selectedIndex == 2
+              //     ? Compras()
+              //     : SizedBox(), // Agrega más condiciones si tienes más pantallas
             )
           ],
         ),
@@ -270,60 +277,5 @@ class AppStore {
     iconColor = const Color.fromARGB(255, 0, 128, 255);
     iconSecondaryColor = const Color(0xFFA8ABAD);
     cardColor = const Color(0xFF191D36);
-  }
-}
-
-// CARRUSEL
-class HorizontalCarousel extends StatelessWidget {
-  final List<String> imageUrls = [
-    'assets/images/sillas.png',
-    'https://via.placeholder.com/300',
-    'https://via.placeholder.com/300',
-    'https://via.placeholder.com/300',
-  ];
-
-  final List<String> descriptions = [
-    'Imagen 1',
-    'Imagen 2',
-    'Imagen 3',
-    'Imagen 4',
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: CarouselSlider.builder(
-          itemCount: imageUrls.length,
-          options: CarouselOptions(
-            viewportFraction: 0.9, 
-            enlargeCenterPage: true,
-            aspectRatio: 0.5,
-            autoPlay: true,
-          ),
-          itemBuilder: (context, index, realIndex) {
-            return Card(
-              elevation: 19.0,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    imageUrls[index],
-                    height: 620,
-                    width: 550,
-                    fit: BoxFit.cover,
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    descriptions[index],
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-      ),
-    );
   }
 }
