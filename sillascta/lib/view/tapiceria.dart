@@ -7,26 +7,26 @@ class MenuItem {
   MenuItem({required this.title, required this.imageUrl});
 }
 
-class Alquiler extends StatefulWidget {
-  const Alquiler({super.key});
+class Tapiceria extends StatefulWidget {
+  const Tapiceria({super.key});
 
   @override
-  State<Alquiler> createState() => _AlquilerState();
+  State<Tapiceria> createState() => _TapiceriaState();
 }
 
-class _AlquilerState extends State<Alquiler> {
+class _TapiceriaState extends State<Tapiceria> {
   final List<MenuItem> menuItems = [
+    MenuItem(
+      title: '',
+      imageUrl: 'assets/images/sillaga.png',
+    ),
     MenuItem(
       title: '',
       imageUrl: 'assets/images/sillaco.png',
     ),
     MenuItem(
       title: '',
-      imageUrl: 'assets/images/silla15.png',
-    ),
-    MenuItem(
-      title: '',
-      imageUrl: 'assets/images/sillaga.png',
+      imageUrl: 'assets/images/sillavi.png',
     ),
     // Agrega más elementos aquí
   ];
@@ -42,7 +42,7 @@ class _AlquilerState extends State<Alquiler> {
             children: [
               const SizedBox(height: 20),
               const Text(
-                'Alquilar',
+                'Tapiceria',
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,

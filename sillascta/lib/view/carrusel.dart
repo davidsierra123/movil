@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:carousel_slider/carousel_slider.dart';
 
-
 class HorizontalCarousel extends StatefulWidget {
   const HorizontalCarousel({super.key});
 
@@ -13,7 +12,7 @@ class HorizontalCarousel extends StatefulWidget {
 class _HorizontalCarouselState extends State<HorizontalCarousel> {
   final List<String> imageUrls = [
     'assets/images/tapi.png',
-    'assets/images/sillasgra.png',
+    'assets/images/silla15.png',
     'assets/images/sillaga.png',
   ];
 
@@ -100,4 +99,4 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
       ),
     );
   }
-} 
+}

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
-import 'view/menu.dart';
+import 'view/alquiler.dart';
 import 'view/carrusel.dart';
+import 'view/tapiceria.dart';
+import 'view/compra.dart';
 
 void main() {
   runApp(const MyApp());
@@ -138,12 +140,9 @@ class _DemoMWNavigationRailScreen1State
   List<Widget> widgets = <Widget>[
     const Center(child: HorizontalCarousel()),
     const Center(child: Alquiler()),
+    const Center(child: Tapiceria()),
     const Center(
-        child: Text("Notifications View",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24))),
-    const Center(
-        child: Text("Notifications View",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24))),
+        child: Compra()),
     const Center(
         child: Text("Schedule View",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24))),
@@ -240,7 +239,12 @@ class _DemoMWNavigationRailScreen1State
                   ? const HorizontalCarousel() // Muestra HorizontalCarousel si _selectedIndex es 0
                   : _selectedIndex == 1
                       ? const Alquiler()
-                      : widgets[_selectedIndex],
+                      : _selectedIndex == 2
+                          ? const Tapiceria()
+                          : _selectedIndex == 3
+                          ? const Compra()
+                          : widgets[_selectedIndex],
+                          
               // : _selectedIndex == 2
               //     ? Compras()
               //     : SizedBox(), // Agrega más condiciones si tienes más pantallas
