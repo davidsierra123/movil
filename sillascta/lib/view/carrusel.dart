@@ -18,8 +18,8 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
 
   final List<String> titles = [
     'Tapiceria y mantenimiento',
-    'Alquilar',
-    'Comprar',
+    'Alquiler',
+    'Compras',
   ];
 
   final List<String> descriptions = [

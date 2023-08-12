@@ -28,7 +28,6 @@ class _TapiceriaState extends State<Tapiceria> {
       title: '',
       imageUrl: 'assets/images/sillavi.png',
     ),
-    // Agrega más elementos aquí
   ];
 
   @override

@@ -141,8 +141,7 @@ class _DemoMWNavigationRailScreen1State
     const Center(child: HorizontalCarousel()),
     const Center(child: Alquiler()),
     const Center(child: Tapiceria()),
-    const Center(
-        child: Compra()),
+    const Center(child: Compra()),
     const Center(
         child: Text("Schedule View",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24))),
@@ -242,9 +241,9 @@ class _DemoMWNavigationRailScreen1State
                       : _selectedIndex == 2
                           ? const Tapiceria()
                           : _selectedIndex == 3
-                          ? const Compra()
-                          : widgets[_selectedIndex],
-                          
+                              ? const Compra()
+                              : widgets[_selectedIndex],
+
               // : _selectedIndex == 2
               //     ? Compras()
               //     : SizedBox(), // Agrega más condiciones si tienes más pantallas

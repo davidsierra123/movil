@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sillascta/view/formulario.dart';
 
 class MenuItem {
   final String title;
@@ -73,7 +74,8 @@ class MenuItemWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(20), // Ajusta el radio de borde como prefieras
+          borderRadius: BorderRadius.circular(
+              20), // Ajusta el radio de borde como prefieras
           child: Image.asset(
             item.imageUrl,
             height: 150,
@@ -83,12 +85,19 @@ class MenuItemWidget extends StatelessWidget {
         ),
         const SizedBox(height: 5), // Espacio entre imagen y título
         Text(item.title),
-        const SizedBox(height: 5), // Espacio entre título y botón
+        const SizedBox(height: 5),
+         // Espacio entre título y botón
         ElevatedButton(
           onPressed: () {
-            // Acción al presionar el botón
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    const Formulario(), // Cambia 'Formulario' por el nombre de tu archivo.dart
+              ),
+            );
           },
-          child: const Text('Alquilar!'),
+          child: const Text('¡Alquilar!'),
         ),
         const SizedBox(height: 20), // Espacio entre elementos
       ],
