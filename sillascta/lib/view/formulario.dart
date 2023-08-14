@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sillascta/view/alquiler.dart'; // Importa el paquete carousel_slider
+// ignore: unused_import
+import 'package:sillascta/view/alquiler.dart';
+import 'package:sillascta/view/m_pagos.dart'; // Importa el paquete carousel_slider
 
 void main() {
   runApp(const MyApp());
@@ -41,8 +43,17 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
     return regex.hasMatch(input);
   }
 
-  List<String> generoOptions = ['Seleccionar', 'Normal', 'Deteriorada','Muy deteriorada'];
-  String selectedGenero = 'Seleccionar'; 
+  List<String> generoOptions = [
+    'Seleccionar',
+    'Normal',
+    'Deteriorada',
+    'Muy deteriorada'
+  ];
+  String selectedGenero = 'Seleccionar';
+
+  // ignore: non_constant_identifier_names
+  List<String> ColorOptions = ['Seleccionar', 'Azul', 'Verde', 'Gris'];
+  String selectedColor = 'Seleccionar';
 
   var usernameCont = TextEditingController();
   var emailCont = TextEditingController();
@@ -50,6 +61,8 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
   var addressCont = TextEditingController();
   // ignore: non_constant_identifier_names
   var CedulaCont = TextEditingController();
+  // ignore: non_constant_identifier_names
+  var ExpeCont = TextEditingController();
 
   var usernameFocus = FocusNode();
   var emailFocus = FocusNode();
@@ -57,6 +70,8 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
   var addressFocus = FocusNode();
   // ignore: non_constant_identifier_names
   var CedulaFocus = FocusNode();
+  // ignore: non_constant_identifier_names
+  var ExpeFocus = FocusNode();
 
   @override
   void initState() {
@@ -75,14 +90,6 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Formulario de Alquiler',
-      //       style: TextStyle(color: black)),
-      //   centerTitle: true,
-      //   backgroundColor: Colors
-      //       .transparent, // Cambia el color del AppBar según tus necesidades
-      //   // elevation: 0,
-      // ),
       body: Container(
         padding: const EdgeInsets.all(16),
         color: Colors
@@ -95,14 +102,14 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
               child: Column(
                 children: [
                   const Text(
-                    'Formulario de Registro',
+                    'Formulario de Alquiler',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 40),
                   TextFormField(
                     controller: usernameCont,
                     focusNode: usernameFocus,
@@ -138,7 +145,7 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
                   ),
                   // ESTE ES EL DISEÑO Y INPUT DE EL IMAIL
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   TextFormField(
                     controller: CedulaCont,
@@ -174,7 +181,7 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
                     },
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   TextFormField(
                     controller: emailCont,
@@ -208,7 +215,7 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
                     },
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   TextFormField(
                     controller: addressCont,
@@ -241,7 +248,41 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
                     },
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
+                  ),
+                  DropdownButtonFormField<String>(
+                    value: selectedColor,
+                    onChanged: (newValue) {
+                      setState(() {
+                        selectedColor = newValue!;
+                      });
+                    },
+                    items: ColorOptions.map((Color) {
+                      return DropdownMenuItem<String>(
+                        value: Color,
+                        child: Text(Color),
+                      );
+                    }).toList(),
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.palette,
+                        color: appStore.iconColor,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        borderSide: BorderSide(color: appStore.iconColor!),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        borderSide:
+                            BorderSide(width: 1, color: appStore.iconColor!),
+                      ),
+                      labelText: 'Color',
+                      labelStyle: const TextStyle(fontSize: 16),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
                   ),
                   DropdownButtonFormField<String>(
                     value: selectedGenero,
@@ -258,7 +299,7 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
                     }).toList(),
                     decoration: InputDecoration(
                       prefixIcon: Icon(
-                        Icons.people,
+                        Icons.broken_image,
                         color: appStore.iconColor,
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -273,6 +314,45 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
                       labelText: 'Estado',
                       labelStyle: const TextStyle(fontSize: 16),
                     ),
+                    validator: (value) {
+                      if (value == null || value == 'Seleccionar') {
+                        return 'Selecciona un estado válido'; // Mensaje de error si no se ha seleccionado un estado válido
+                      }
+                      return null; // Sin errores
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    controller: ExpeCont,
+                    style: const TextStyle(fontSize: 16),
+                    focusNode: ExpeFocus,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.create,
+                        color: appStore.iconColor,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        borderSide: BorderSide(color: appStore.iconColor!),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        borderSide:
+                            BorderSide(width: 1, color: appStore.iconColor!),
+                      ),
+                      labelText: 'Expecificaciones',
+                      labelStyle: const TextStyle(fontSize: 16),
+                    ),
+                    cursorColor: Colors.black,
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (s) {
+                      if (s!.trim().isEmpty) {
+                        return 'Las expecificaciones son requeridas';
+                      }
+                      return null;
+                    },
                   ),
                   Theme(
                     data: ThemeData.light(),
@@ -297,7 +377,7 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const Alquiler()), // Cambia 'OtraPantalla' por el nombre de tu archivo.dart
+                                                const M_Pagos()), // Cambia 'OtraPantalla' por el nombre de tu archivo.dart
                                       );
                                     },
                                     child: const Text('OK'),
@@ -312,7 +392,8 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
 
                         setState(() {});
                       },
-                      child: Text('Submit', style: boldTextStyle(color: white)),
+                      child:
+                          Text('¡Enviar!', style: boldTextStyle(color: white)),
                     ),
                   ).paddingTop(15)
                 ],
