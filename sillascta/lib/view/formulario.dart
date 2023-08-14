@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sillascta/view/alquiler.dart'; // Importa el paquete carousel_slider
 
@@ -40,6 +41,9 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
     return regex.hasMatch(input);
   }
 
+  List<String> generoOptions = ['Seleccionar', 'Normal', 'Deteriorada','Muy deteriorada'];
+  String selectedGenero = 'Seleccionar'; 
+
   var usernameCont = TextEditingController();
   var emailCont = TextEditingController();
   var phoneCont = TextEditingController();
@@ -71,14 +75,14 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        title: const Text('Formulario de Alquiler',
-            style: TextStyle(color: black)),
-        centerTitle: true,
-        backgroundColor: Colors
-            .transparent, // Cambia el color del AppBar según tus necesidades
-        elevation: 0, // Remueve la sombra del AppBar
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Formulario de Alquiler',
+      //       style: TextStyle(color: black)),
+      //   centerTitle: true,
+      //   backgroundColor: Colors
+      //       .transparent, // Cambia el color del AppBar según tus necesidades
+      //   // elevation: 0,
+      // ),
       body: Container(
         padding: const EdgeInsets.all(16),
         color: Colors
@@ -90,6 +94,15 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
               autovalidateMode: AutovalidateMode.always,
               child: Column(
                 children: [
+                  const Text(
+                    'Formulario de Registro',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
                   TextFormField(
                     controller: usernameCont,
                     focusNode: usernameFocus,
@@ -227,6 +240,40 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
                       return null;
                     },
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  DropdownButtonFormField<String>(
+                    value: selectedGenero,
+                    onChanged: (newValue) {
+                      setState(() {
+                        selectedGenero = newValue!;
+                      });
+                    },
+                    items: generoOptions.map((genero) {
+                      return DropdownMenuItem<String>(
+                        value: genero,
+                        child: Text(genero),
+                      );
+                    }).toList(),
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.people,
+                        color: appStore.iconColor,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        borderSide: BorderSide(color: appStore.iconColor!),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        borderSide:
+                            BorderSide(width: 1, color: appStore.iconColor!),
+                      ),
+                      labelText: 'Estado',
+                      labelStyle: const TextStyle(fontSize: 16),
+                    ),
+                  ),
                   Theme(
                     data: ThemeData.light(),
                     child: MaterialButton(
@@ -234,19 +281,23 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           formKey.currentState!.save();
-                           showDialog(
+                          showDialog(
                             context: context,
                             builder: (context) {
                               return AlertDialog(
                                 title: const Text('Datos registrados'),
-                                content: const Text('Sus datos han sido registrados correctamente.'),
+                                content: const Text(
+                                    'Sus datos han sido registrados correctamente.'),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
-                                      Navigator.of(context).pop(); // Cerrar el AlertDialog
+                                      Navigator.of(context)
+                                          .pop(); // Cerrar el AlertDialog
                                       Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => const Alquiler()), // Cambia 'OtraPantalla' por el nombre de tu archivo.dart
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const Alquiler()), // Cambia 'OtraPantalla' por el nombre de tu archivo.dart
                                       );
                                     },
                                     child: const Text('OK'),
