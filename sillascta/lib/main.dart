@@ -152,6 +152,34 @@ class _DemoMWNavigationRailScreen1State
   bool showHorizontalCarousel = true;
   bool isExpanded = false;
 
+  Future<void> Salir (BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Salir'),
+          content: const Text('¿Estás seguro de que deseas salir?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancelar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Sí'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Cierra el diálogo
+                // Regresa a la vista principal (primera vista)
+                Navigator.of(context).popUntil((route) => route.isFirst);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -162,10 +190,14 @@ class _DemoMWNavigationRailScreen1State
               selectedIndex: _selectedIndex,
               extended: isExpanded,
               onDestinationSelected: (int index) {
-                setState(() {
-                  _selectedIndex = index;
-                  showHorizontalCarousel = index == 0;
-                });
+                if (index == 4) {
+                  Salir(context);
+                } else {
+                  setState(() {
+                    _selectedIndex = index;
+                    showHorizontalCarousel = index == 0;
+                  });
+                }
               },
               leading: AnimatedContainer(
                 duration: const Duration(milliseconds: 100),
@@ -221,30 +253,21 @@ class _DemoMWNavigationRailScreen1State
                   selectedIcon: Icon(Icons.exit_to_app, color: Colors.blue),
                   padding: EdgeInsets.all(0),
                 ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.settings),
-                  label: Text('Settings', style: TextStyle(fontSize: 16)),
-                  selectedIcon: Icon(Icons.settings, color: Colors.blue),
-                  padding: EdgeInsets.all(0),
-                ),
               ],
             ),
             const VerticalDivider(width: 0),
             Expanded(
-              child: _selectedIndex == 0
-                  ? const HorizontalCarousel() // Muestra HorizontalCarousel si _selectedIndex es 0
-                  : _selectedIndex == 1
-                      ? const Alquiler()
-                      : _selectedIndex == 2
-                          ? const Tapiceria()
-                          : _selectedIndex == 3
-                              ? const Compra()
-                              : widgets[_selectedIndex],
-
-              // : _selectedIndex == 2
-              //     ? Compras()
-              //     : SizedBox(), // Agrega más condiciones si tienes más pantallas
-            )
+              child: IndexedStack(
+                index: _selectedIndex,
+                children: [
+                  const HorizontalCarousel(),
+                  const Alquiler(),
+                  const Tapiceria(),
+                  const Compra(),
+                  Container(), // No mostrar contenido en esta posición
+                ],
+              ),
+            ),
           ],
         ),
       ),

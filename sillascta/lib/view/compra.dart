@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sillascta/view/Formu_Compra.dart';
+
 
 class MenuItem {
   final String title;
@@ -83,6 +85,13 @@ class MenuItemWidget extends StatelessWidget {
         const SizedBox(height: 5), // Espacio entre título y botón
         ElevatedButton(
           onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    const Formu_Compra(), // Cambia 'Formulario' por el nombre de tu archivo.dart
+              ),
+            );
             // Acción al presionar el botón
           },
           child: const Text('¡Comprar!'),
