@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sillascta/view/formulario.dart';
+import 'package:sillascta/view/formu_alqui.dart';
 
 class MenuItem {
   final String title;
@@ -41,7 +41,7 @@ class _AlquilerState extends State<Alquiler> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               const Text(
                 'Alquilar',
                 style: TextStyle(
@@ -49,7 +49,7 @@ class _AlquilerState extends State<Alquiler> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               Column(
                 children: menuItems.map((item) {
                   return MenuItemWidget(item: item);
@@ -97,6 +97,7 @@ class MenuItemWidget extends StatelessWidget {
               ),
             );
           },
+          
           child: const Text('¡Alquilar!'),
         ),
         const SizedBox(height: 20), // Espacio entre elementos

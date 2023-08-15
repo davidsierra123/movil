@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sillascta/view/formulario.dart';
+// ignore: unused_import
+import 'package:sillascta/view/formu_alqui.dart';
 
 // ignore: camel_case_types
 class M_Pagosss {
@@ -45,7 +46,7 @@ class Metodos_Pago extends State<M_Pagos> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 20),
+              // const SizedBox(height: 0),
               const Text(
                 'Metodos de pago',
                 style: TextStyle(
@@ -53,7 +54,7 @@ class Metodos_Pago extends State<M_Pagos> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 0),
               Column(
                 children: M_Pagossss.map((item) {
                   return M_PagosssWidget(item: item);
@@ -88,9 +89,9 @@ class M_PagosssWidget extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        const SizedBox(height: 5), // Espacio entre imagen y título
+        const SizedBox(height: 0), // Espacio entre imagen y título
         Text(item.title),
-        const SizedBox(height: 5),
+        const SizedBox(height: 0),
          // Espacio entre título y botón
         ElevatedButton(
           onPressed: () {

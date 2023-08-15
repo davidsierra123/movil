@@ -43,17 +43,13 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
     return regex.hasMatch(input);
   }
 
-  List<String> generoOptions = [
-    'Seleccionar',
-    'Normal',
-    'Deteriorada',
-    'Muy deteriorada'
-  ];
-  String selectedGenero = 'Seleccionar';
+  // ignore: non_constant_identifier_names
+  List<String> CantidadOptions = ['Seleccionar', '10 sillas', '50 sillas', '100 sillas', '1000 sillas'];
+  String selectedCantidad = 'Seleccionar';
 
   // ignore: non_constant_identifier_names
-  List<String> ColorOptions = ['Seleccionar', 'Azul', 'Verde', 'Gris'];
-  String selectedColor = 'Seleccionar';
+  List<String> TiempoOptions = ['Seleccionar', '1 Hr', '5 Hrs', '10 Hrs'];
+  String selectedTiempo = 'Seleccionar';
 
   var usernameCont = TextEditingController();
   var emailCont = TextEditingController();
@@ -251,13 +247,14 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
                     height: 20,
                   ),
                   DropdownButtonFormField<String>(
-                    value: selectedColor,
+                    value: selectedTiempo,
                     onChanged: (newValue) {
                       setState(() {
-                        selectedColor = newValue!;
+                        selectedTiempo = newValue!;
                       });
                     },
-                    items: ColorOptions.map((Color) {
+                    // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
+                    items: CantidadOptions.map((Color) {
                       return DropdownMenuItem<String>(
                         value: Color,
                         child: Text(Color),
@@ -265,7 +262,7 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
                     }).toList(),
                     decoration: InputDecoration(
                       prefixIcon: Icon(
-                        Icons.palette,
+                        Icons.add,
                         color: appStore.iconColor,
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -277,46 +274,12 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
                         borderSide:
                             BorderSide(width: 1, color: appStore.iconColor!),
                       ),
-                      labelText: 'Color',
-                      labelStyle: const TextStyle(fontSize: 16),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  DropdownButtonFormField<String>(
-                    value: selectedGenero,
-                    onChanged: (newValue) {
-                      setState(() {
-                        selectedGenero = newValue!;
-                      });
-                    },
-                    items: generoOptions.map((genero) {
-                      return DropdownMenuItem<String>(
-                        value: genero,
-                        child: Text(genero),
-                      );
-                    }).toList(),
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.broken_image,
-                        color: appStore.iconColor,
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                        borderSide: BorderSide(color: appStore.iconColor!),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                        borderSide:
-                            BorderSide(width: 1, color: appStore.iconColor!),
-                      ),
-                      labelText: 'Estado',
+                      labelText: 'Cantidad de sillas',
                       labelStyle: const TextStyle(fontSize: 16),
                     ),
                     validator: (value) {
                       if (value == null || value == 'Seleccionar') {
-                        return 'Selecciona un estado válido'; // Mensaje de error si no se ha seleccionado un estado válido
+                        return 'Selecciona una Cantidad'; // Mensaje de error si no se ha seleccionado un estado válido
                       }
                       return null; // Sin errores
                     },
@@ -324,13 +287,22 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
                   const SizedBox(
                     height: 20,
                   ),
-                  TextFormField(
-                    controller: ExpeCont,
-                    style: const TextStyle(fontSize: 16),
-                    focusNode: ExpeFocus,
+                  DropdownButtonFormField<String>(
+                    value: selectedCantidad,
+                    onChanged: (newValue) {
+                      setState(() {
+                        selectedCantidad = newValue!;
+                      });
+                    },
+                    items: TiempoOptions.map((genero) {
+                      return DropdownMenuItem<String>(
+                        value: genero,
+                        child: Text(genero),
+                      );
+                    }).toList(),
                     decoration: InputDecoration(
                       prefixIcon: Icon(
-                        Icons.create,
+                        Icons.access_time,
                         color: appStore.iconColor,
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -342,18 +314,48 @@ class DemoMWTextFormFieldScreenState extends State<Formulario> {
                         borderSide:
                             BorderSide(width: 1, color: appStore.iconColor!),
                       ),
-                      labelText: 'Expecificaciones',
+                      labelText: 'Tiempo',
                       labelStyle: const TextStyle(fontSize: 16),
                     ),
-                    cursorColor: Colors.black,
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (s) {
-                      if (s!.trim().isEmpty) {
-                        return 'Las expecificaciones son requeridas';
+                    validator: (value) {
+                      if (value == null || value == 'Seleccionar') {
+                        return 'Selecciona un tiempo'; // Mensaje de error si no se ha seleccionado un estado válido
                       }
-                      return null;
+                      return null; // Sin errores
                     },
                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  // TextFormField(
+                  //   controller: ExpeCont,
+                  //   style: const TextStyle(fontSize: 16),
+                  //   focusNode: ExpeFocus,
+                  //   decoration: InputDecoration(
+                  //     prefixIcon: Icon(
+                  //       Icons.create,
+                  //       color: appStore.iconColor,
+                  //     ),
+                  //     focusedBorder: OutlineInputBorder(
+                  //       borderRadius: BorderRadius.circular(25.0),
+                  //       borderSide: BorderSide(color: appStore.iconColor!),
+                  //     ),
+                  //     enabledBorder: OutlineInputBorder(
+                  //       borderRadius: BorderRadius.circular(25.0),
+                  //       borderSide:
+                  //           BorderSide(width: 1, color: appStore.iconColor!),
+                  //     ),
+                  //     labelText: 'Expecificaciones',
+                  //     labelStyle: const TextStyle(fontSize: 16),
+                  //   ),
+                  //   cursorColor: Colors.black,
+                  //   keyboardType: TextInputType.emailAddress,
+                  //   validator: (s) {
+                  //     if (s!.trim().isEmpty) {
+                  //       return 'Las expecificaciones son requeridas';
+                  //     }
+                  //     return null;
+                  //   },
                   Theme(
                     data: ThemeData.light(),
                     child: MaterialButton(

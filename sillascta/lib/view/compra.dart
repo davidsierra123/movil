@@ -40,7 +40,7 @@ class _CompraState extends State<Compra> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               const Text(
                 'Compra',
                 style: TextStyle(
@@ -48,7 +48,7 @@ class _CompraState extends State<Compra> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               Column(
                 children: menuItems.map((item) {
                   return MenuItemWidget(item: item);

@@ -145,9 +145,6 @@ class _DemoMWNavigationRailScreen1State
     const Center(
         child: Text("Schedule View",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24))),
-    const Center(
-        child: Text("Settings View",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24))),
   ];
 
   int _selectedIndex = 0;
