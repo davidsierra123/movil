@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:sillascta/view/formu_alqui.dart';
+import 'package:sillascta/view/siu.dart';
 
 // ignore: camel_case_types
 class M_Pagosss {
@@ -23,16 +24,19 @@ class Metodos_Pago extends State<M_Pagos> {
   // ignore: non_constant_identifier_names
   final List<M_Pagosss> M_Pagossss = [
     M_Pagosss(
-      title: '',
+      title: 'Pago en efectivo',
       imageUrl: 'assets/images/logo.png',
+      // route: '/pago_efectivo',
     ),
     M_Pagosss(
       title: '',
       imageUrl: 'assets/images/daviplata.png',
+      // route: '',
     ),
     M_Pagosss(
       title: '',
       imageUrl: 'assets/images/c_entrega.png',
+      // route: '',
     ),
     // Agrega más elementos aquí
   ];
@@ -95,13 +99,13 @@ class M_PagosssWidget extends StatelessWidget {
          // Espacio entre título y botón
         ElevatedButton(
           onPressed: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) =>
-            //         const Formulario(), // Cambia 'Formulario' por el nombre de tu archivo.dart
-            //   ),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    const MyHomePage(), // Cambia 'Formulario' por el nombre de tu archivo.dart
+              ),
+            );
           },
           child: const Text('¡Seleccionar!'),
         ),

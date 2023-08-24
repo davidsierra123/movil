@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// ignore: camel_case_types
 class Formu_Tapi extends StatefulWidget {
   static String tag = '/DemoMWTextFormFieldScreen';
 
