@@ -45,11 +45,23 @@ class DemoMWTextFormFieldScreenState extends State<Formu_Tapi> {
   }
 
   // ignore: non_constant_identifier_names
-  List<String> EstadoOptions = ['Seleccionar', 'Normal', 'Deteriorada', 'Muy deteriorada'];
+  List<String> EstadoOptions = [
+    'Seleccionar',
+    'Normal',
+    'Deteriorada',
+    'Muy deteriorada'
+  ];
   String selectedEstado = 'Seleccionar';
 
   // ignore: non_constant_identifier_names
-  List<String> ColorOptions = ['Seleccionar', 'Verde', 'Azul', 'Rojo', 'Negro','Blanco'];
+  List<String> ColorOptions = [
+    'Seleccionar',
+    'Verde',
+    'Azul',
+    'Rojo',
+    'Negro',
+    'Blanco'
+  ];
   String selectedColor = 'Seleccionar';
 
   var usernameCont = TextEditingController();
@@ -289,7 +301,6 @@ class DemoMWTextFormFieldScreenState extends State<Formu_Tapi> {
                     height: 20,
                   ),
 
-                  
                   DropdownButtonFormField<String>(
                     value: selectedEstado,
                     onChanged: (newValue) {
@@ -297,6 +308,7 @@ class DemoMWTextFormFieldScreenState extends State<Formu_Tapi> {
                         selectedEstado = newValue!;
                       });
                     },
+                    // ignore: non_constant_identifier_names
                     items: EstadoOptions.map((Estado) {
                       return DropdownMenuItem<String>(
                         value: Estado,

@@ -24,7 +24,7 @@ class Metodos_Pago extends State<M_Pagos> {
   // ignore: non_constant_identifier_names
   final List<M_Pagosss> M_Pagossss = [
     M_Pagosss(
-      title: 'Pago en efectivo',
+      title: '',
       imageUrl: 'assets/images/logo.png',
       // route: '/pago_efectivo',
     ),
@@ -96,7 +96,7 @@ class M_PagosssWidget extends StatelessWidget {
         const SizedBox(height: 0), // Espacio entre imagen y título
         Text(item.title),
         const SizedBox(height: 0),
-         // Espacio entre título y botón
+        // Espacio entre título y botón
         ElevatedButton(
           onPressed: () {
             Navigator.push(

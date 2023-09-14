@@ -30,7 +30,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final ImagePicker _imagePicker = ImagePicker();
 
   Future<void> _getImageFromGallery() async {
-    final pickedFile = await _imagePicker.pickImage(source: ImageSource.gallery);
+    final pickedFile =
+        await _imagePicker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
@@ -50,23 +51,35 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Image and Inputs')),
+      // appBar: AppBar(title: const Text('Image and Inputs')),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(16.0), // Agregamos un padding alrededor de los elementos
+          padding: const EdgeInsets.all(
+              16.0), // Agregamos un padding alrededor de los elementos
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              // ignore: avoid_unnecessary_containers
+              Container(
+                child: const Text(
+                  'Comprobante de pago',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 150),
               TextFormField(
                 decoration: const InputDecoration(
-                  labelText: 'Input 1 (Disabled)',
+                  labelText: 'Jesus David Bolivar',
                   enabled: false,
                 ),
               ),
               const SizedBox(height: 16),
               TextFormField(
                 decoration: const InputDecoration(
-                  labelText: 'Input 2 (Disabled)',
+                  labelText: '3015644968',
                   enabled: false,
                 ),
               ),
@@ -87,13 +100,38 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: _getImageFromGallery,
-                child: const Text('Pick Image from Gallery'),
+                child: const Text('Elegir foto de galeria'),
               ),
               const SizedBox(height: 8),
               ElevatedButton(
                 onPressed: _getImageFromCamera,
-                child: const Text('Take a Photo'),
+                child: const Text('Tomar foto'),
               ),
+              const SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text(
+                            'Se ha cargado su comprobante con exito'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pop(); // Cerrar el AlertDialog
+                            },
+                            child: const Text('Cerrar'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                child: const Text('Cargar comprobante'),
+              )
             ],
           ),
         ),
